@@ -1,21 +1,30 @@
 [
   {
-    "full_name": "Abhiram Reddy",
+    "full_name": "Abhiram",
     "phone_number": "16783132760",
     "email": "abhi.reddy1@gmail.com",
     "tags": [
-      "Work",
-      "Friend"
+      {
+        "tag": "Work",
+        "selected": false
+      },
+      {
+        "tag": "Friend",
+        "selected": false
+      },
+      {
+        "tag": "Marketing",
+        "selected": false
+      },
+      {
+        "tag": "Finance",
+        "selected": false
+      },
+      {
+        "tag": "Fitness",
+        "selected": false
+      }
     ],
     "id": 1
-  },
-  {
-    "full_name": "Abhiram Reddy",
-    "phone_number": "16783132760",
-    "email": "abhi.reddy1@gmail.com",
-    "tags": [
-      "Marketing"
-    ],
-    "id": 2
   }
 ]

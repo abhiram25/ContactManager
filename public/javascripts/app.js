@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {	
 	class ContactManager {
 		constructor() {
 			this.contactTemplate = Handlebars.compile(document.querySelector('#contactTemplate').innerHTML);
@@ -9,6 +9,20 @@ document.addEventListener('DOMContentLoaded', () => {
 			this.noContactsResult = document.querySelector('#noContactsResults');
 			this.contactForm = document.querySelector('#contactForm');
 			this.searchBox = document.querySelector('#searchBox');
+		}
+
+		registerHelpers() {
+			Handlebars.registerHelper('filteredTags', function(data) {
+				let filteredData = data.filter(({selected}) => {
+					return selected;
+				})
+
+				if (filteredData.length > 0) {
+					return filteredData.map(({tag}) => { return tag });
+				} else {
+					return "None";
+				}
+			});					
 		}
 
 		displayContactList() {
@@ -56,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						return full_name.toUpperCase().startsWith(key.toUpperCase());
 					})
 
-					length = filteredContacts.leng;
+					length = filteredContacts.length;
 
 					if (length > 0) {
 						contactBox.innerHTML = this.contactTemplate({'contacts': filteredContacts});
@@ -73,25 +87,36 @@ document.addEventListener('DOMContentLoaded', () => {
 			contactRequest.send();
 		}
 
-		generateData() {
+		generateData() {		
 			let data = {};
+			let tags = [];				
 			[...this.contactForm.querySelectorAll('[name]')].forEach(node => {
 				if (node.nodeName === 'SELECT') {
-					data[node.name] = [...node.querySelectorAll('option')].filter(({selected}) => {
-						return selected;
-					}).map(({value}) => {return value;});
+					tags = data[node.name] = [...node.querySelectorAll('option')].map(({value, selected}) => {
+						if (selected) {
+							return {
+								"tag": `${value}`,
+								"selected": true,
+							}
+						} else {
+							return {
+								"tag": `${value}`,
+								"selected": false,
+							}
+						}
+					})
 				} else {
 					data[node.name] = node.value;
 				}
 			})
-
+				
 			return data;
 		}
 
-		add() {
+		add() {	
 			let form = this.contactForm;
 			let data = JSON.stringify(this.generateData(form));
-			let blankInputs = this.invalidForm().length;
+			let blankInputs = this.invalidForm().length;			
 
 			let newContactRequest = new XMLHttpRequest();
 			newContactRequest.addEventListener('load', () => {
@@ -218,6 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		init() {
 			this.displayContactList();
+			this.registerHelpers();
 			this.bindEvents();
 		}
 	}

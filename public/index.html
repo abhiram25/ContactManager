@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Contact Manager Local</title>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+  <script src="/javascripts/jquery.js"></script>
+  <script src="/javascripts/handlebars.js"></script>
+  <script src="/javascripts/app.js"></script>
+  <script type="text/x-handlerbars" id="noContactTemplate">
+		<h2>There is no contacts.</h2>
+		<button class="addContact">Add Contact</button>  	
+  </script>
+  <script type="text/x-handlerbars" id="contactTemplate">
+  	{{#each contacts}}
+			<div class="contact">
+				<h1>{{full_name}}</h1>
+				<dl id={{id}}>
+					<dt><strong>Phone Number:</strong></dt>
+					<dd>{{phone_number}}</dd>
+					<dt><strong>Email:</strong></dt>
+					<dd>{{email}}</dd>
+					<dt><strong>Tags:</strong></dt>	
+					{{#if tags}}
+						<dd>{{tags}}</dd>
+					{{else}}
+						<dd>None</dd>
+					{{/if}}
+					<button class="editContact">Edit</button>				
+					<button>Delete</button>
+				</dl>					
+			</div>
+		{{/each}} 	
+  </script>
+	<script type="text/x-handlerbars" id="editContactTemplate">
+			<h1>Edit Contact</h1>
+			<div>
+				<label for="full_name">Full Name: <input type="text" name="full_name" value={{full_name}}></label>
+				<p class="errorMessage">Please enter the name field.</p>
+			</div>
+			<div>
+				<label for="email">Email: <input type="email" name="email" value={{email}}></label>
+				<p class="errorMessage">Please enter the valid email field.</p>			
+			</div>
+			<div>
+				<label for="phone_number">Phone Number:	<input type="tel" name="phone_number" value={{phone_number}}></label>
+				<p class="errorMessage">Please enter the phone field.</p>
+			</div>
+			<div>
+				<label for="tags">Tags:</label>
+				<select name="tags" id="tags" multiple>
+			  	<option value="Work">Work</option>
+			  	<option value="Friend">Friend</option>
+			  	<option value="Marketing">Marketing</option>
+			  	<option value="Finance">Finance</option>
+			  	<option value="Fitness">Fitness</option>
+				</select>
+			</div>			
+			<input type="submit"></input>
+			<input type="reset" value="Cancel" class="cancelButton">	
+	</script>
+	<script type="text/x-handlerbars" id="newContactTemplate">
+		<h1>Create Contact</h1>
+		<div>
+			<label for="full_name">Full Name: <input type="text" name="full_name"></label>
+			<p class="errorMessage">Please enter the name field.</p>
+		</div>
+		<div>
+			<label for="email">Email: <input type="email" name="email"></label>
+			<p class="errorMessage">Please enter the valid email field.</p>			
+		</div>
+		<div>
+			<label for="phone_number">Phone Number:	<input type="tel" name="phone_number"></label>
+			<p class="errorMessage">Please enter the phone field.</p>
+		</div>
+		<div>
+			<label for="tags">Tags:</label>
+			<select name="tags" id="tags" multiple>
+				{{#each tags}}
+			  	<option value={{this}}>{{this}}</option>
+			  {{/each}}
+			</select>
+		</div>
+		<input type="submit"></input>
+		<input type="reset" value="Cancel" class="cancelButton">		
+	</script>  
+	<script type="text/x-handlerbars" id="noContactResultsTemplate">
+		<h2>There is no contacts starting with {{letter}}</h2>
+	</script>	
+</head>
+<body>
+	<header>
+		<h1>Contact Manager</h1>
+		<p>Using Backbone.js, Localstorage, RequireJS, Handlebar and Bootstrap</p>
+	</header>
+	<section>
+		<div id="menuBox">
+			<div class="col-1">
+				<button class="addContact">Add Contact</button>
+			</div>
+			<div class="col-2">
+				<input type="text" name="search" placeholder="Search" id="searchBox">
+			</div>
+		</div>
+		<div id="noContactBox">		
+		</div>
+		<div id="noContactsResults">			
+		</div>
+	</section>
+	<form id="contactForm" class="contactForm">
+	</form>
+	<footer>
+		<p>Developed by <a href="https://www.devsaran.com/">Devsaran.com</a> and <a href="https://www.239listing.com/">239 Listing Real Estate</a>.</p>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,96 @@
+* {
+	margin: 0;
+}
+
+body {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+header {
+	text-align: center;	
+	background: #624788;
+	padding: 35px 0;
+}
+
+header h1 {
+	color: #fff;
+	font-weight: 500;
+}
+
+header p {
+	color: #CEBFE2;
+}
+
+#menuBox {
+	background: #F5F5F5;
+	margin: 0px 20px;
+	border: 1px solid #E3E3E3;
+	border-radius: 3px;
+	padding: 20px 0;
+}
+
+.col-1,
+.col-2 {
+	display: inline-block;
+	width: 48%;
+	text-align: center;
+}
+
+#noContactBox,
+#noContactsResults {
+	text-align: center;
+	background: #F5F5F5;
+	border: 1px solid #E3E3E3;
+	border-radius: 3px;
+	padding: 20px;
+	margin: 20px 35px;
+}
+
+#noContactsResults {
+	display: none;
+}
+
+#contactBox {
+	margin: 30px 40px;
+}
+
+#noContactBox h2 {
+	margin-bottom: 15px;
+}
+
+.contact {
+	width: 22.5%;
+	display: inline-block;
+	margin-right: 10px;
+	margin-bottom: 15px;
+}
+
+#newContactForm,
+#editContactForm {
+	text-align: center;
+	display: none;
+}
+
+.errorMessage {
+	display: none;
+	color: red;
+}
+
+#tags {
+	padding: 10px;
+}
+
+#tags option {
+	background: lightgreen;
+	display: inline-block;
+	margin: 0 10px;]
+	padding: 30px;
+	border-radius: 4px;
+}
+
+
+footer {
+	border-top: 1px solid #E3E3E3;
+	padding-top: 10px;
+	text-align: center;
+}

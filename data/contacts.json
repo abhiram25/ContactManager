@@ -1,0 +1,21 @@
+[
+  {
+    "full_name": "Abhiram Reddy",
+    "phone_number": "16783132760",
+    "email": "abhi.reddy1@gmail.com",
+    "tags": [
+      "Work",
+      "Friend"
+    ],
+    "id": 1
+  },
+  {
+    "full_name": "Abhiram Reddy",
+    "phone_number": "16783132760",
+    "email": "abhi.reddy1@gmail.com",
+    "tags": [
+      "Marketing"
+    ],
+    "id": 2
+  }
+]

@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						return full_name.toUpperCase().startsWith(key.toUpperCase());
 					})
 
-					length = filteredContacts.length;
+					length = filteredContacts.lengt;
 
 					if (length > 0) {
 						contactBox.innerHTML = this.contactTemplate({'contacts': filteredContacts});

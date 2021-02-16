@@ -1,16 +1,16 @@
 [
   {
-    "full_name": "Abhiram",
+    "full_name": "Abhi",
     "phone_number": "16783132760",
     "email": "abhi.reddy1@gmail.com",
     "tags": [
       {
         "tag": "Work",
-        "selected": false
+        "selected": true
       },
       {
         "tag": "Friend",
-        "selected": false
+        "selected": true
       },
       {
         "tag": "Marketing",

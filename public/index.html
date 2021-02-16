@@ -8,58 +8,58 @@
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
   <script src="/javascripts/jquery.js"></script>
   <script src="/javascripts/handlebars.js"></script>
-  <script src="/javascripts/app.js"></script>
+  <script type = "module" src="/javascripts/app.js"></script>
   <script type="text/x-handlerbars" id="noContactTemplate">
 		<h2>There is no contacts.</h2>
 		<button class="addContact">Add Contact</button>  	
   </script>
   <script type="text/x-handlerbars" id="contactTemplate">
   	{{#each contacts}}
-			<div class="contact" id={{id}}>
+	  	<div class="contact" id={{id}}>
 				<h1>{{full_name}}</h1>
-				<dl>
-					<dt><strong>Phone Number:</strong></dt>
-					<dd>{{phone_number}}</dd>
-					<dt><strong>Email:</strong></dt>
-					<dd>{{email}}</dd>
-					<dt><strong>Tags:</strong></dt>	
-					{{#filteredTags tags}}
-						<dd>{{tags}}</dd>
-					{{/filteredTags}}
-				</dl>					
-				<button class="editContact">Edit</button>				
-				<button>Delete</button>				
+					<dl>
+						<dt><strong>Phone Number:</strong></dt>
+						<dd>{{phone_number}}</dd>
+						<dt><strong>Email:</strong></dt>
+						<dd>{{email}}</dd>
+						<dt><strong>Tags:</strong></dt>	
+						{{#filteredTags tags}}
+							<dd>{{tags}}</dd>
+						{{/filteredTags}}
+					</dl>					
+					<button class="editContact">Edit</button>				
+					<button>Delete</button>				
 			</div>
 		{{/each}} 	
   </script>
 	<script type="text/x-handlerbars" id="editContactTemplate">
-			<h1>Edit Contact</h1>
-			<div>
-				<label for="full_name">Full Name: <input type="text" name="full_name" value={{full_name}}></label>
-				<p class="errorMessage">Please enter the name field.</p>
-			</div>
-			<div>
-				<label for="email">Email: <input type="email" name="email" value={{email}}></label>
-				<p class="errorMessage">Please enter the valid email field.</p>			
-			</div>
-			<div>
-				<label for="phone_number">Phone Number:	<input type="tel" name="phone_number" value={{phone_number}}></label>
-				<p class="errorMessage">Please enter the phone field.</p>
-			</div>
-			<div>
-				<label for="tags">Tags:</label>
-				<select name="tags" id="tags" multiple>
-					{{#each tags}}
-						{{#if selected}}
-							<option value={{tag}} selected>{{tag}}</option>
-						{{else}}
-							<option value={{tag}}>{{tag}}</option>
-						{{/if}}
-					{{/each}}
-				</select>
-			</div>			
-			<input type="submit"></input>
-			<input type="reset" value="Cancel" class="cancelButton">	
+		<h1>Edit Contact</h1>
+		<div>
+			<label for="full_name">Full Name: <input type="text" name="full_name" value={{full_name}}></label>
+			<p class="errorMessage">Please enter the name field.</p>
+		</div>
+		<div>
+			<label for="email">Email: <input type="email" name="email" value={{email}}></label>
+			<p class="errorMessage">Please enter the valid email field.</p>			
+		</div>
+		<div>
+			<label for="phone_number">Phone Number:	<input type="tel" name="phone_number" value={{phone_number}}></label>
+			<p class="errorMessage">Please enter the phone field.</p>
+		</div>
+		<div>
+			<label for="tags">Tags:</label>
+			<select name="tags" id="tags" multiple>
+				{{#each tags}}
+					{{#if selected}}
+						<option value={{tag}} selected>{{tag}}</option>
+					{{else}}
+						<option value={{tag}}>{{tag}}</option>
+					{{/if}}
+				{{/each}}
+			</select>
+		</div>			
+		<input type="submit"></input>
+		<input type="reset" value="Cancel" class="cancelButton">	
 	</script>
 	<script type="text/x-handlerbars" id="newContactTemplate">
 		<h1>Create Contact</h1>

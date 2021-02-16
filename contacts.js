@@ -29,7 +29,6 @@ app.get('/api/contacts/:id', (req, res) => {
 app.post('/api/contacts', (req, res) => {
   let contactAttrs = helpers.extractContactAttrs(req.body);
   let contact = contactManager.add(contactAttrs);
-  console.log(req.body);
   if (contact) {
     res.status(201).json(contact);
   } else {

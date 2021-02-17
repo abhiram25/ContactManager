@@ -1,5 +1,7 @@
 import {TemplateManager} from './templateManager.js';
 import {FormHandler} from './form_handler.js';
+import {TagManager} from './TagManager.js'
+import {tags} from './TagManager.js';
 
 export class UI {
 	constructor() {
@@ -8,26 +10,19 @@ export class UI {
 		this.templateManager = new TemplateManager;
 		this.formHandler = new FormHandler;
 		this.section = document.querySelector('section');
+		this.tagManager = new TagManager;
 	}
 
 	getValue() {
 		return this.searchBox.value;
 	}	
 
-	showContactForm() {
+	showForm() {
 		let $section = $('section');
-		let $contactForm;
-
-		if ($('#newContactForm').length > 0) {
-			$contactForm = $('#newContactForm');
-		} else if ($('#editContactForm').length > 0) {
-			$contactForm = $('#editContactForm');
-		} else {
-			$contactForm = $('#contactForm');
-		}						
+		let $form = $('form');
 		$section.slideUp()
-		$contactForm.show()
-		document.body.insertBefore($section[0], $contactForm[0]);
+		$form.show()
+		document.body.insertBefore($section[0], this.formHandler.form);
 	}
 
 	resetSearch() {
@@ -41,19 +36,11 @@ export class UI {
 
 	generateContacts(contacts) {
 		let $section = $('section');
-		let $contactForm;				
-
-		if ($('#contactForm').length > 0) {
-			$contactForm = $('#contactForm');
-		} else if ($('#newContactForm').length > 0) {
-			$contactForm = $('#newContactForm');
-		} else {
-			$contactForm = $('#editContactForm');
-		}		
+		let $form = $('form');
 
 		contactBox.innerHTML = this.templateManager.contactTemplate({'contacts': contacts});
-		document.body.insertBefore(this.formHandler.contactForm, this.section);
-		$contactForm.slideUp()
+		document.body.insertBefore(this.formHandler.form, this.section);
+		$form.slideUp()
 		$section.show()								
 	}
 
@@ -61,6 +48,17 @@ export class UI {
     this.resetSearch();
     this.displayContactList();		
 	}
+
+  addNewTagToForms() {
+    let value = this.tagManager.getNewTag();
+
+    if (value) {
+      tags.push(value);
+      this.resetSearchAndDisplay()
+    } else {
+      this.formHandler.validateForm();
+    }
+  }
 
 	displayContactList() {
 		let contactRequest = new XMLHttpRequest();
@@ -111,15 +109,10 @@ export class UI {
 	showSection() {
 		this.noContactsResult.display = 'none';			
 		let $section = $('section');
-		let $contactForm;
+		let $form = $('form');
 
-		if ($('#newContactForm').length > 0) {
-			$contactForm = $('#newContactForm');
-		} else if ($('#editContactForm').length > 0) {
-			$contactForm = $('#editContactForm');
-		}
-		document.body.insertBefore($contactForm[0], $section[0]);
-		$contactForm.slideUp()
+		document.body.insertBefore(this.formHandler.form, $section[0]);
+		$form.slideUp()
 		$section.show()
 	}
 }

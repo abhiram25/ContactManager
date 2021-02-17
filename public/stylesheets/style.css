@@ -65,10 +65,9 @@ header p {
 	margin-bottom: 15px;
 }
 
-#newContactForm,
-#editContactForm {
-	text-align: center;
-	display: none;
+form {
+  text-align: center;
+  display: none;
 }
 
 .errorMessage {

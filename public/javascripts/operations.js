@@ -1,10 +1,12 @@
 import {UI} from './ui.js';
 import {FormHandler} from './form_handler.js';
+import {TagManager} from './tagManager.js';
 
 export class Operations {
   constructor() {
     this.ui = new UI;
     this.formHandler = new FormHandler;
+    this.tagManager = new TagManager;
   }
 
   handleRequest(request) {
@@ -15,7 +17,7 @@ export class Operations {
     });    
   }
 
-  add() { 
+  addContact() { 
     let data = JSON.stringify(this.formHandler.generateData(this.formHandler.contactForm));
     let newContactRequest = new XMLHttpRequest();    
     let blankInputs = this.formHandler.invalidForm().length;
@@ -37,7 +39,7 @@ export class Operations {
     let blankInputs = this.formHandler.invalidForm().length;
 
     if (!blankInputs) {
-      editRequest.open('PUT', `${this.formHandler.contactForm.getAttribute('action')}`);
+      editRequest.open('PUT', `${this.formHandler.form.getAttribute('action')}`);
       editRequest.setRequestHeader('Content-Type', 'application/json');
       editRequest.send(data);
     } else {

@@ -45,7 +45,7 @@
 		<div>
 			<label for="phone_number">Phone Number:	<input type="tel" name="phone_number" value={{phone_number}}></label>
 			<p class="errorMessage">Please enter the phone field.</p>
-		</div>
+		</div>		
 		<div>
 			<label for="tags">Tags:</label>
 			<select name="tags" id="tags" multiple>
@@ -88,7 +88,16 @@
 	</script>  
 	<script type="text/x-handlerbars" id="noContactResultsTemplate">
 		<h2>There is no contacts starting with {{letter}}</h2>
-	</script>	
+	</script>
+	<script type="text/x-handlerbars" id="newTagTemplate">
+		<h1>Add New Tag</h1>
+		<div>
+			<label for="new_tag">New Tag: <input type="text" name="new_tag"></label>
+			<p class="errorMessage">Please Enter a new Tag</p>
+		</div>
+		<input type="submit"></input>
+		<input type="reset" value="Cancel" class="cancelButton">			
+	</script>		
 </head>
 <body>
 	<header>
@@ -99,6 +108,7 @@
 		<div id="menuBox">
 			<div class="col-1">
 				<button class="addContact">Add Contact</button>
+				<button id="addTag">Add Tag</button>
 			</div>
 			<div class="col-2">
 				<input type="text" name="search" placeholder="Search" id="searchBox">
@@ -109,7 +119,7 @@
 		<div id="noContactsResults">			
 		</div>
 	</section>
-	<form id="contactForm" class="contactForm">
+	<form id="contactForm">
 	</form>
 	<footer>
 		<p>Developed by <a href="https://www.devsaran.com/">Devsaran.com</a> and <a href="https://www.239listing.com/">239 Listing Real Estate</a>.</p>

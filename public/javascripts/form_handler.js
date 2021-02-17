@@ -1,26 +1,42 @@
-import {UI} from "./ui.js";
 import {TemplateManager} from './templateManager.js';
+import {TagManager} from './tagManager.js';
+import {tags} from './TagManager.js';
 
 export class FormHandler {
 	constructor()	{
-		this.contactForm = document.querySelector('#contactForm');
+		this.form = document.querySelector('form');
+		this.newTagForm = document.querySelector('#newTagForm');
 		this.templateManager = new TemplateManager;
+		this.tagManager = new TagManager;
 	}
 
 	createNewContactForm() {
-		const tags = ['Work', 'Friend', 'Marketing', 'Finance', 'Fitness'];		
-		this.contactForm.setAttribute('id', 'newContactForm');
-		this.contactForm.innerHTML = this.templateManager.newContactTemplate({'tags': tags});		
+		this.form.setAttribute('id', 'newContactForm');
+		this.form.innerHTML = this.templateManager.newContactTemplate({'tags': tags});		
 	}
+
+	createNewTagForm() {
+		this.form.setAttribute('id', 'newTagForm');
+		this.form.innerHTML = this.templateManager.newTagTemplate();	
+	}
+
+  addNewTagOption() {
+  	let selectTagInput = document.querySelector('select');
+  	let tag = this.tagManager.newTag;
+  	let option = document.createElement('option');
+  	option.textContent = tags[tags.length-1];
+  	selectTagInput.appendChild(option);
+  }  	
 
 	updateEditForm() {
 		let request = new XMLHttpRequest();
 		let id = event.target.parentNode.id;
-		this.contactForm.setAttribute('id', 'editContactForm');
-		this.contactForm.setAttribute('action', `/api/contacts/${event.target.parentNode.id}`);		
+		this.form.setAttribute('id', 'editContactForm');
+		this.form.setAttribute('action', `/api/contacts/${event.target.parentNode.id}`);		
 		
 		request.addEventListener('load', () => {
-			this.contactForm.innerHTML = this.templateManager.editContactTemplate(request.response);
+			this.form.innerHTML = this.templateManager.editContactTemplate(request.response);
+			this.addNewTagOption()	
 		})
 
 		request.open('GET', `/api/contacts/${id}`);
@@ -31,7 +47,7 @@ export class FormHandler {
 	generateData() {		
 		let data = {};
 		let tags = [];				
-		[...this.contactForm.querySelectorAll('[name]')].forEach(node => {
+		[...this.form.querySelectorAll('[name]')].forEach(node => {
 			if (node.nodeName === 'SELECT') {
 				tags = data[node.name] = [...node.querySelectorAll('option')].map(({value, selected}) => {
 					if (selected) {
@@ -55,14 +71,14 @@ export class FormHandler {
 	}	
 
 	invalidForm() {
-		let requiredInputs = this.contactForm.querySelectorAll('input[name]');
+		let requiredInputs = this.form.querySelectorAll('input[name]');
 		return [...requiredInputs].filter(({value}) => {
 			return !value.trim() 
 		})			
 	}
 
 	removeErrors() {
-		[...this.contactForm.querySelectorAll('input[name]')].forEach(({parentNode, style}) => {
+		[...this.form.querySelectorAll('input[name]')].forEach(({parentNode, style}) => {
 			parentNode.style.color = '#222';
 			parentNode.nextElementSibling.style.display = 'none';
 			style.borderColor = '#FFFFFF';
